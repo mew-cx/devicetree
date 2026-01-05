@@ -1,0 +1,12 @@
+# mew 2025-12-18
+# for Waveshare "4inch DPI LCD (C)" 720x720 display
+# on RasPi5 'five' using RaspiOS 13 Trixie, see:
+# https://www.waveshare.com/wiki/4inch_DPI_LCD_(C)
+# https://files.waveshare.com/upload/8/8a/4DPIC-DTBO.zip
+dtoverlay=vc4-kms-v3d
+dtoverlay=vc4-kms-DPI-4inch
+dtoverlay=waveshare-4dpic-3b-4b
+dtoverlay=waveshare-4dpic-3b
+dtoverlay=waveshare-4dpic-4b
+dtoverlay=waveshare-4dpi
+dtoverlay=waveshare-touch-4dpi
