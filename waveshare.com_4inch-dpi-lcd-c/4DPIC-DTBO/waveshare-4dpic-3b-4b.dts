@@ -1,0 +1,88 @@
+<stdout>: Warning (unit_address_vs_reg): /fragment@3/__overlay__/i2c@0: node has a unit name, but no reg or ranges property
+<stdout>: Warning (gpios_property): /fragment@2/__overlay__/rpi_backlight:gpios: Could not get phandle node for (cell 1)
+<stdout>: Warning (gpios_property): /fragment@3/__overlay__/i2c@0:gpios: Could not get phandle node for (cell 1)
+<stdout>: Warning (gpios_property): /__fixups__:gpio: Could not get phandle node for (cell 0)
+/dts-v1/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	__fixups__ {
+		fb = "/fragment@0:target:0";
+		gpio = "/fragment@1:target:0", "/fragment@2/__overlay__/rpi_backlight:gpios:0", "/fragment@3/__overlay__/i2c@0:gpios:0", "/fragment@3/__overlay__/i2c@0:gpios:12";
+	};
+
+	__local_fixups__ {
+
+		fragment@0 {
+
+			__overlay__ {
+				pinctrl-0 = <0x00>;
+			};
+		};
+	};
+
+	__symbols__ {
+		dpi18_pins = "/fragment@1/__overlay__/dpi18_pins";
+		i2c_gpio = "/fragment@3/__overlay__/i2c_gpio";
+	};
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			pinctrl-0 = <0x01>;
+			pinctrl-names = "default";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			dpi18_pins {
+				brcm,function = <0x06>;
+				brcm,pins = <0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0c 0x0d 0x0e 0x0f 0x10 0x11 0x14 0x15 0x16 0x17 0x18 0x19>;
+				brcm,pull = <0x00>;
+				phandle = <0x01>;
+			};
+		};
+	};
+
+	fragment@2 {
+		target-path = "/";
+
+		__overlay__ {
+
+			rpi_backlight {
+				compatible = "gpio-backlight";
+				default-on;
+				gpios = <0xffffffff 0x12 0x01>;
+			};
+		};
+	};
+
+	fragment@3 {
+		target-path = "/";
+
+		__overlay__ {
+
+			i2c@0 {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+				compatible = "i2c-gpio";
+				gpios = <0xffffffff 0x0a 0x00 0xffffffff 0x0b 0x00>;
+				i2c-gpio,delay-us = <0x04>;
+			};
+		};
+	};
+
+	fragment@4 {
+		target-path = "/__symbols__";
+
+		__overlay__ {
+			i2c_gpio = "/i2c@0";
+		};
+	};
+};

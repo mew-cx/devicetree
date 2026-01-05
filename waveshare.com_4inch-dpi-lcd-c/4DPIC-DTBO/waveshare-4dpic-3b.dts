@@ -1,0 +1,33 @@
+<stdout>: Warning (gpios_property): /__fixups__:gpio: property size (53) is invalid, expected multiple of 4
+<stdout>: Warning (interrupts_property): /fragment@0/__overlay__/ft6236@5d:interrupt-parent: Invalid phandle
+<stdout>: Warning (interrupts_property): /fragment@0/__overlay__/ft6236@5d: Missing interrupt-parent
+/dts-v1/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	__fixups__ {
+		gpio = "/fragment@0/__overlay__/ft6236@5d:interrupt-parent:0";
+		i2c_gpio = "/fragment@0:target:0";
+	};
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+
+			ft6236@5d {
+				compatible = "goodix,gt911";
+				interrupt-parent = <0xffffffff>;
+				interrupts = <0x1b 0x02>;
+				reg = <0x5d>;
+				touchscreen-size-x = <0x2d0>;
+				touchscreen-size-y = <0x2d0>;
+				touchscreen-x-mm = <0x48>;
+				touchscreen-y-mm = <0x48>;
+			};
+		};
+	};
+};
