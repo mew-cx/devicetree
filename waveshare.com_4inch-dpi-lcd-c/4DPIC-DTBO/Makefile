@@ -20,7 +20,9 @@ dtc_version.txt :
 .SUFFIXES :
 
 .PHONEY : clean clobber nuke
-clean clobber nuke :
+clean clobber :
 	-$(RM) $(TGTS)
+nuke :
+	-$(RM) *.dtbo
 
 # vim: set ts=8 noet ic ai:
