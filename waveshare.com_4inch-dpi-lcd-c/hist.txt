@@ -1,0 +1,8 @@
+  687  man dtoverlay
+  692  sudo dtoverlay -a
+  695  sudo dtoverlay -l -v
+
+  708  fdtdump waveshare-4dpic-4b.dtbo 
+  711  sudo vclog --msg
+  712  dtc -I fs /proc/device-tree
+  723  cat /proc/bus/input/devices 
